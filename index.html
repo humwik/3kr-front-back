@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Практика 15: Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    
+    <!-- Практика 15: Color scheme -->
+    <meta name="color-scheme" content="light dark">
+    
+    <!-- Практика 15: Корректный заголовок -->
+    <title>Главная - Контрольная работа П15-18</title>
+</head>
+<body>
+    <!-- Практика 17: Ссылка-пропуск -->
+    <a href="#main" class="skip-link">Перейти к основному содержимому</a>
+    
+    <!-- Практика 15: Семантическая структура -->
+    <header class="header">
+        <!-- Практика 15: Sticky хедер с safe areas -->
+        <nav class="nav" aria-label="Основная навигация">
+            <!-- Практика 17: Доступное меню -->
+        </nav>
+    </header>
+    
+    <main id="main">
+        <!-- Практика 15: Герой с responsive images -->
+        <section class="hero">
+            <!-- Практика 16: Picture element с разными форматами -->
+            <picture>
+                <source type="image/avif" srcset="...">
+                <source type="image/webp" srcset="...">
+                <img src="..." alt="..." width="200" height="200">
+            </picture>
+        </section>
+        
+        <!-- Практика 15: Grid сетка проектов -->
+        <section class="projects">
+            <div class="projects-grid">
+                <!-- Практика 15: Авто-адаптивная Grid -->
+                <!-- Практика 15: Container queries -->
+            </div>
+        </section>
+        
+        <!-- Практика 16: Адаптивная галерея -->
+        <section class="gallery">
+            <div class="gallery-grid">
+                <!-- Практика 16: Object-fit демонстрация -->
+                <!-- Практика 16: Retina изображения -->
+            </div>
+        </section>
+        
+        <!-- Практика 16: Адаптивная таблица -->
+        <section class="table-section">
+            <table class="responsive-table">
+                <!-- Практика 16: Таблица с адаптивностью -->
+            </table>
+        </section>
+        
+        <!-- Практика 17: Форма с доступностью -->
+        <section class="contact-preview">
+            <form class="accessible-form">
+                <!-- Практика 17: Доступная форма -->
+                <!-- Практика 18: Поля для анализа Lighthouse -->
+            </form>
+        </section>
+        
+        <!-- Практика 17: Модальное окно -->
+        <button class="modal-trigger" aria-haspopup="dialog">
+            Открыть модальное окно
+        </button>
+        <div class="modal" role="dialog" aria-modal="true">
+            <!-- Практика 17: Доступное модальное окно -->
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <!-- Практика 15: Footer с safe areas -->
+        <!-- Практика 17: Доступные ссылки -->
+    </footer>
+</body>
+</html>

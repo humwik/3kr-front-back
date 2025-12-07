@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <title>Контакты - Практика доступности</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/forms.css">
+    <link rel="stylesheet" href="styles/accessibility.css">
+</head>
+<body>
+    <!-- Ссылка для пропуска -->
+    <a href="#main-form" class="skip-link">Перейти к форме обратной связи</a>
+    
+    <div class="page">
+        <header class="header">
+            <nav class="nav" aria-label="Основная навигация">
+                <!-- Навигация -->
+            </nav>
+        </header>
+
+        <main id="main" class="main">
+            <h1>Свяжитесь с нами</h1>
+            
+            <!-- Практика 17: Доступная форма -->
+            <form id="main-form" class="contact-form" 
+                  aria-labelledby="form-title"
+                  novalidate>
+                
+                <div id="form-title" class="visually-hidden">
+                    Форма обратной связи для связи с администрацией сайта
+                </div>
+                
+                <!-- Группа полей -->
+                <fieldset class="form-fieldset">
+                    <legend class="form-legend">
+                        <h2>Личная информация</h2>
+                    </legend>
+                    
+                    <!-- Поле с лейблом и валидацией -->
+                    <div class="form-group">
+                        <label for="name" class="form-label">
+                            Имя 
+                            <span class="required-indicator" aria-hidden="true">*</span>
+                            <span class="visually-hidden">обязательное поле</span>
+                        </label>
+                        
+                        <input type="text" 
+                               id="name" 
+                               name="name"
+                               class="form-input"
+                               required
+                               aria-required="true"
+                               aria-describedby="name-hint name-error"
+                               placeholder="Иван Иванов">
+                        
+                        <div id="name-hint" class="form-hint">
+                            Введите ваше полное имя
+                        </div>
+                        
+                        <div id="name-error" class="form-error" role="alert" aria-live="assertive">
+                            <!-- Сообщения об ошибках будут здесь -->
+                        </div>
+                    </div>
+                    
+                    <!-- Поле email -->
+                    <div class="form-group">
+                        <label for="email" class="form-label">
+                            Email
+                            <span class="required-indicator" aria-hidden="true">*</span>
+                        </label>
+                        
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               class="form-input"
+                               required
+                               aria-required="true"
+                               aria-describedby="email-hint email-error"
+                               inputmode="email">
+                        
+                        <div id="email-hint" class="form-hint">
+                            Мы отправим ответ на этот адрес
+                        </div>
+                    </div>
+                    
+                    <!-- Практика 18: Поле для анализа Lighthouse -->
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Телефон</label>
+                        <input type="tel" 
+                               id="phone" 
+                               name="phone"
+                               class="form-input"
+                               aria-describedby="phone-hint"
+                               pattern="[\+]\d{1}\s?[\(]\d{3}[\)]\s?\d{3}[\-]\d{2}[\-]\d{2}"
+                               placeholder="+7 (999) 123-45-67">
+                        <div id="phone-hint" class="form-hint">
+                            Формат: +7 (999) 123-45-67
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <!-- Выпадающий список -->
+                <div class="form-group">
+                    <label for="topic" class="form-label">Тема обращения</label>
+                    <select id="topic" 
+                            name="topic"
+                            class="form-select"
+                            aria-describedby="topic-hint">
+                        <option value="" selected disabled>Выберите тему</option>
+                        <option value="question">Вопрос по сайту</option>
+                        <option value="bug">Сообщить об ошибке</option>
+                        <option value="suggestion">Предложение</option>
+                    </select>
+                    <div id="topic-hint" class="form-hint">
+                        Выберите наиболее подходящую тему
+                    </div>
+                </div>
+                
+                <!-- Текстовое поле -->
+                <div class="form-group">
+                    <label for="message" class="form-label">Сообщение</label>
+                    <textarea id="message"
+                              name="message"
+                              class="form-textarea"
+                              rows="5"
+                              aria-describedby="message-hint"
+                              maxlength="1000"></textarea>
+                    <div id="message-hint" class="form-hint">
+                        Максимум 1000 символов
+                    </div>
+                    <div class="char-counter" aria-live="polite">
+                        Осталось символов: 1000
+                    </div>
+                </div>
+                
+                <!-- Группа радиокнопок -->
+                <fieldset class="form-fieldset">
+                    <legend class="form-legend">Предпочтительный способ связи</legend>
+                    
+                    <div class="radio-group">
+                        <input type="radio" 
+                               id="contact-email" 
+                               name="contact-method" 
+                               value="email"
+                               class="visually-hidden"
+                               checked>
+                        <label for="contact-email" class="radio-label">
+                            <span class="radio-custom"></span>
+                            Email
+                        </label>
+                        
+                        <input type="radio" 
+                               id="contact-phone" 
+                               name="contact-method" 
+                               value="phone"
+                               class="visually-hidden">
+                        <label for="contact-phone" class="radio-label">
+                            <span class="radio-custom"></span>
+                            Телефон
+                        </label>
+                    </div>
+                </fieldset>
+                
+                <!-- Чекбокс -->
+                <div class="form-group">
+                    <input type="checkbox" 
+                           id="agree" 
+                           name="agree"
+                           class="visually-hidden"
+                           required>
+                    <label for="agree" class="checkbox-label">
+                        <span class="checkbox-custom"></span>
+                        Я согласен на обработку персональных данных
+                        <span class="required-indicator" aria-hidden="true">*</span>
+                    </label>
+                </div>
+                
+                <!-- Кнопки -->
+                <div class="form-actions">
+                    <button type="submit" 
+                            class="button button-primary"
+                            aria-label="Отправить форму обратной связи">
+                        Отправить сообщение
+                    </button>
+                    
+                    <button type="reset" 
+                            class="button button-secondary"
+                            aria-label="Очистить форму">
+                        Очистить
+                    </button>
+                    
+                    <!-- Кнопка для демонстрации модального окна -->
+                    <button type="button"
+                            class="button button-help"
+                            aria-haspopup="dialog"
+                            aria-controls="help-modal">
+                        Нужна помощь?
+                    </button>
+                </div>
+                
+                <!-- Статус отправки -->
+                <div id="form-status" 
+                     class="form-status" 
+                     role="status" 
+                     aria-live="polite">
+                    <!-- Сообщения о статусе формы -->
+                </div>
+            </form>
+            
+            <!-- Практика 17: Модальное окно -->
+            <div id="help-modal" 
+                 class="modal" 
+                 role="dialog" 
+                 aria-modal="true"
+                 aria-labelledby="modal-title"
+                 aria-describedby="modal-desc"
+                 hidden>
+                <div class="modal-content">
+                    <h2 id="modal-title">Помощь по заполнению формы</h2>
+                    <p id="modal-desc">Здесь вы найдете ответы на частые вопросы</p>
+                    
+                    <button class="modal-close"
+                            aria-label="Закрыть окно помощи">
+                        ×
+                    </button>
+                    
+                    <div class="modal-body">
+                        <!-- Содержимое модального окна -->
+                    </div>
+                </div>
+                <div class="modal-overlay" tabindex="-1"></div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <!-- Футер -->
+        </footer>
+    </div>
+    
+    <!-- Скрипты -->
+    <script src="scripts/form-validation.js"></script>
+    <script src="scripts/modal.js"></script>
+    
+    <!-- Практика 18: Скрипт для анализа формы через Lighthouse -->
+    <script>
+    // Этот код специально содержит "плохие практики" для демонстрации в Lighthouse
+    document.addEventListener('DOMContentLoaded', function() {
+        // НЕПРАВИЛЬНО: div с обработчиком клика (будет ошибка в Lighthouse)
+        const badButton = document.createElement('div');
+        badButton.textContent = 'Нажми меня (плохой пример)';
+        badButton.style.cssText = 'background: blue; color: white; padding: 10px; cursor: pointer; margin: 20px 0;';
+        badButton.onclick = function() {
+            alert('Это плохой пример кнопки!');
+        };
+        document.querySelector('form').appendChild(badButton);
+        
+        // Изображение без alt (будет ошибка в Lighthouse)
+        const badImage = document.createElement('img');
+        badImage.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiM2NjYiLz48L3N2Zz4=';
+        badImage.style.cssText = 'width: 100px; height: 100px; display: block; margin: 10px 0;';
+        document.querySelector('form').appendChild(badImage);
+        
+        // Поле без label (будет ошибка в Lighthouse)
+        const badInput = document.createElement('input');
+        badInput.type = 'text';
+        badInput.placeholder = 'Поле без лейбла (плохой пример)';
+        badInput.style.cssText = 'display: block; margin: 10px 0; padding: 5px;';
+        document.querySelector('form').appendChild(badInput);
+    });
+    </script>
+</body>
+</html>
