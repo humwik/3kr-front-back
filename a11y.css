@@ -1,0 +1,721 @@
+/* 
+   Практика 17-18: Стили доступности
+   A11y, фокус, контраст, скринридеры
+*/
+
+/* ========== ПРАКТИКА 17: ДОСТУПНОСТЬ ========== */
+
+/* High contrast для визуальных элементов */
+.high-contrast {
+    --primary: #0000FF;
+    --border: #000000;
+}
+
+@media (prefers-contrast: high) {
+    :root {
+        --primary: #0000FF;
+        --primary-dark: #0000CC;
+        --border: #000000;
+    }
+    
+    .btn {
+        border: 2px solid currentColor;
+    }
+    
+    .form-input {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .card:hover {
+        transform: none;
+    }
+    
+    .btn:hover {
+        transform: none;
+    }
+}
+
+/* Focus styles для клавиатурной навигации */
+:focus {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Увеличение целевой области для touch */
+@media (pointer: coarse) {
+    .btn,
+    .nav__link,
+    input[type="checkbox"],
+    input[type="radio"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .form-input {
+        min-height: 44px;
+    }
+}
+
+/* ========== ПРАКТИКА 17: СКРИНРИДЕРЫ ========== */
+
+/* Стили для скрытия элементов визуально, но оставления для скринридеров */
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Копия .visually-hidden без @extend */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Ариа живые регионы */
+[aria-live="polite"] {
+    position: relative;
+}
+
+[aria-live="assertive"] {
+    position: relative;
+}
+
+/* Состояния ARIA */
+[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+[aria-hidden="true"] {
+    display: none;
+}
+
+[aria-invalid="true"] {
+    border-color: var(--danger);
+}
+
+[aria-current="page"] {
+    font-weight: bold;
+}
+
+/* ========== ПРАКТИКА 17: ФОРМЫ ========== */
+
+/* Группы полей */
+fieldset {
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+legend {
+    font-weight: bold;
+    padding: 0 0.5rem;
+}
+
+/* Радиокнопки и чекбоксы для доступности */
+.radio-group,
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+/* Альтернативный стиль для чекбоксов */
+.custom-checkbox {
+    position: relative;
+    padding-left: 2rem;
+    cursor: pointer;
+}
+
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: #eee;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+}
+
+.custom-checkbox:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+    background-color: var(--primary);
+}
+
+/* ========== ПРАКТИКА 17: ОШИБКИ И СТАТУСЫ ========== */
+
+.error-message {
+    color: var(--danger);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.error-message:not(:empty) {
+    display: block;
+}
+
+.success-message {
+    color: var(--success);
+    background: #f0fdf4;
+    border: 1px solid var(--success);
+    padding: 1rem;
+    border-radius: var(--radius);
+    margin: 1rem 0;
+}
+
+.warning-message {
+    color: var(--warning);
+    background: #fffbeb;
+    border: 1px solid var(--warning);
+    padding: 1rem;
+    border-radius: var(--radius);
+    margin: 1rem 0;
+}
+
+/* Статусы в таблицах */
+.status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.status.fixed {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status.in-progress {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status.pending {
+    background: #e0e7ff;
+    color: #3730a3;
+}
+
+/* ========== ПРАКТИКА 17: НАВИГАЦИЯ ========== */
+
+/* Хлебные крошки */
+.breadcrumb {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem 0;
+}
+
+.breadcrumb li {
+    display: inline;
+}
+
+.breadcrumb li:not(:last-child)::after {
+    content: "›";
+    margin-left: 0.5rem;
+}
+
+.breadcrumb [aria-current="page"] {
+    font-weight: bold;
+    color: var(--primary);
+}
+
+/* Пагинация */
+.pagination {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 1rem 0;
+}
+
+.pagination a {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+}
+
+.pagination [aria-current="page"] {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* ========== ПРАКТИКА 17: КОНТРАСТНОСТЬ ========== */
+
+/* Демо контрастности */
+.contrast-demo {
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.good-contrast {
+    color: #1e293b; /* темно-серый на белом = хороший контраст */
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: var(--radius);
+}
+
+.bad-contrast {
+    color: #94a3b8; /* светло-серый на белом = плохой контраст */
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: var(--radius);
+}
+
+/* ========== ПРАКТИКА 18: LIGHTHOUSE ========== */
+
+/* Демо проблем Lighthouse */
+.lighthouse-demo {
+    background: #f8fafc;
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    margin: 2rem 0;
+}
+
+.problems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.problem-card {
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    border: 2px solid;
+}
+
+.bad-example {
+    border-color: var(--danger);
+    background: #fee2e2;
+}
+
+.good-example {
+    border-color: var(--success);
+    background: #d1fae5;
+}
+
+.clickable-div {
+    padding: 1rem;
+    background: #3b82f6;
+    color: white;
+    border-radius: var(--radius);
+    cursor: pointer;
+    margin: 1rem 0;
+}
+
+.problem-desc {
+    color: var(--danger);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+.solution-desc {
+    color: var(--success);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* Метрики Lighthouse */
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.metric {
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.score {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+/* ========== ПРАКТИКА 18: ВАЛИДАЦИЯ ========== */
+
+/* Сообщения об ошибках формы */
+.error-field {
+    border-color: var(--danger) !important;
+    background: #fef2f2;
+}
+
+.success-field {
+    border-color: var(--success) !important;
+    background: #f0fdf4;
+}
+
+/* Индикатор валидации в реальном времени */
+.form-validation {
+    position: relative;
+}
+
+.validation-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    display: none;
+}
+
+.validation-icon.valid {
+    background: var(--success);
+    display: block;
+}
+
+.validation-icon.invalid {
+    background: var(--danger);
+    display: block;
+}
+
+/* Прогресс заполнения формы */
+.progress-bar {
+    height: 0.5rem;
+    background: #e2e8f0;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--primary);
+    transition: width 0.3s;
+}
+
+/* ========== ПРАКТИКА 17: ACCESSIBILITY UTILITIES ========== */
+
+/* Skip link animation */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: -999;
+}
+
+.skip-link:focus {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    background: #000;
+    color: #fff;
+    z-index: 9999;
+}
+
+/* Screen reader only text */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Hide element but keep for screen readers */
+.sr-only-focusable:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ========== ПРАКТИКА 17: MODAL ACCESSIBILITY ========== */
+
+/* Modal backdrop for screen readers */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+}
+
+/* Modal dialog accessibility */
+.modal-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    z-index: 1050;
+    max-width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
+}
+
+/* Modal focus trap */
+.modal-open {
+    overflow: hidden;
+}
+
+/* ========== ПРАКТИКА 17: FORM ACCESSIBILITY ========== */
+
+/* Required field indicator */
+.required::after {
+    content: " *";
+    color: var(--danger);
+}
+
+/* Form validation states */
+.is-valid {
+    border-color: var(--success) !important;
+}
+
+.is-invalid {
+    border-color: var(--danger) !important;
+}
+
+/* Form feedback */
+.valid-feedback {
+    display: none;
+    color: var(--success);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.invalid-feedback {
+    display: none;
+    color: var(--danger);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.is-valid ~ .valid-feedback {
+    display: block;
+}
+
+.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* ========== ПРАКТИКА 17: TABLES ACCESSIBILITY ========== */
+
+/* Table caption for screen readers */
+.table-caption {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Table headers for screen readers */
+[scope="col"],
+[scope="row"] {
+    font-weight: bold;
+}
+
+/* ========== ПРАКТИКА 17: IMAGES ACCESSIBILITY ========== */
+
+/* Decorative images */
+img[alt=""] {
+    border: 0;
+}
+
+/* Complex images with description */
+.complex-image {
+    position: relative;
+}
+
+.complex-image figcaption {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ========== ПРАКТИКА 17: KEYBOARD NAVIGATION ========== */
+
+/* Keyboard focus ring */
+.keyboard-focus {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Skip navigation */
+.skip-navigation {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary);
+    color: white;
+    padding: 8px;
+    z-index: 1000;
+    transition: top 0.3s;
+}
+
+.skip-navigation:focus {
+    top: 0;
+}
+
+/* ========== ПРАКТИКА 17: COLOR AND CONTRAST ========== */
+
+/* Contrast checker classes */
+.contrast-pass {
+    border-left: 4px solid var(--success);
+    padding-left: 1rem;
+}
+
+.contrast-fail {
+    border-left: 4px solid var(--danger);
+    padding-left: 1rem;
+}
+
+/* Color blindness simulation (for demo only) */
+.color-blindness-demo {
+    filter: grayscale(100%);
+}
+
+/* ========== ПРАКТИKA 17: ANIMATIONS AND MOTION ========== */
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .animated,
+    .transition-all,
+    .transition-transform,
+    .transition-opacity,
+    .fade-in,
+    .slide-in {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Safe animations */
+.safe-animation {
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+}
+
+/* ========== ПРАКТИКА 17: LANGUAGE AND DIRECTION ========== */
+
+/* Right-to-left support */
+[dir="rtl"] .nav__list {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .breadcrumb li:not(:last-child)::after {
+    content: "‹";
+    margin-left: 0;
+    margin-right: 0.5rem;
+}
+
+/* Language switch */
+.lang-switch {
+    display: inline-block;
+    padding: 0.5rem;
+    background: var(--bg);
+    border-radius: var(--radius);
+}
+
+/* ========== ПРАКТИКА 17: RESPONSIVE ACCESSIBILITY ========== */
+
+/* Mobile accessibility */
+@media (max-width: 768px) {
+    .mobile-a11y {
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    .touch-target {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* High DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .retina-image {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}

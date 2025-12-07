@@ -3,272 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="color-scheme" content="light dark">
-    <title>Контакты - Практика доступности</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/forms.css">
-    <link rel="stylesheet" href="styles/accessibility.css">
+    <title>Контакты - Практика 18</title>
+    <!-- Все CSS в одной папке -->
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="a11y.css">
 </head>
 <body>
-    <!-- Ссылка для пропуска -->
-    <a href="#main-form" class="skip-link">Перейти к форме обратной связи</a>
+    <a href="#main-content" class="skip-link">Перейти к форме контактов</a>
     
     <div class="page">
         <header class="header">
-            <nav class="nav" aria-label="Основная навигация">
-                <!-- Навигация -->
-            </nav>
+            <div class="container">
+                <h1 class="logo">Контакты</h1>
+                <nav class="nav" aria-label="Навигация контактов">
+                    <ul class="nav__list">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="projects.html">Проекты</a></li>
+                        <li><a href="diary.html">Дневник</a></li>
+                        <li><a href="contacts.html" aria-current="page">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
         </header>
 
-        <main id="main" class="main">
-            <h1>Свяжитесь с нами</h1>
-            
-            <!-- Практика 17: Доступная форма -->
-            <form id="main-form" class="contact-form" 
-                  aria-labelledby="form-title"
-                  novalidate>
+        <main id="main-content" class="main">
+            <div class="container">
+                <h1 class="page-title">Практика 18: Lighthouse анализ</h1>
                 
-                <div id="form-title" class="visually-hidden">
-                    Форма обратной связи для связи с администрацией сайта
-                </div>
-                
-                <!-- Группа полей -->
-                <fieldset class="form-fieldset">
-                    <legend class="form-legend">
-                        <h2>Личная информация</h2>
-                    </legend>
+                <section class="lighthouse-demo">
+                    <h2>Типичные проблемы Lighthouse</h2>
                     
-                    <!-- Поле с лейблом и валидацией -->
-                    <div class="form-group">
-                        <label for="name" class="form-label">
-                            Имя 
-                            <span class="required-indicator" aria-hidden="true">*</span>
-                            <span class="visually-hidden">обязательное поле</span>
-                        </label>
-                        
-                        <input type="text" 
-                               id="name" 
-                               name="name"
-                               class="form-input"
-                               required
-                               aria-required="true"
-                               aria-describedby="name-hint name-error"
-                               placeholder="Иван Иванов">
-                        
-                        <div id="name-hint" class="form-hint">
-                            Введите ваше полное имя
+                    <div class="problems-grid">
+                        <div class="problem-card bad-example">
+                            <h3>❌ Плохой пример</h3>
+                            <div class="clickable-div" onclick="alert('Нажато!')">
+                                Div с обработчиком клика
+                            </div>
+                            <p class="problem-desc">Lighthouse: Элементы с обработчиками клика должны иметь роль кнопки</p>
                         </div>
                         
-                        <div id="name-error" class="form-error" role="alert" aria-live="assertive">
-                            <!-- Сообщения об ошибках будут здесь -->
+                        <div class="problem-card good-example">
+                            <h3>✅ Хороший пример</h3>
+                            <button class="btn" onclick="alert('Нажато!')">
+                                Кнопка с семантикой
+                            </button>
+                            <p class="solution-desc">Используйте semantic button для интерактивных действий</p>
+                        </div>
+                        
+                        <div class="problem-card bad-example">
+                            <h3>❌ Плохой пример</h3>
+                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=100&h=100&fit=crop">
+                            <p class="problem-desc">Lighthouse: Изображения должны иметь alt атрибуты</p>
+                        </div>
+                        
+                        <div class="problem-card good-example">
+                            <h3>✅ Хороший пример</h3>
+                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=100&h=100&fit=crop"
+                                 alt="Пример изображения с описанием"
+                                 width="100" height="100">
+                            <p class="solution-desc">Всегда добавляйте alt текст к изображениям</p>
                         </div>
                     </div>
+                </section>
+                
+                <section class="contact-form-section">
+                    <h2>Форма обратной связи</h2>
                     
-                    <!-- Поле email -->
-                    <div class="form-group">
-                        <label for="email" class="form-label">
-                            Email
-                            <span class="required-indicator" aria-hidden="true">*</span>
-                        </label>
+                    <form class="contact-form" id="contact-form" novalidate>
+                        <div class="form-group">
+                            <label for="contact-name" class="form-label">Ваше имя *</label>
+                            <input type="text" id="contact-name" name="name" required
+                                   aria-required="true"
+                                   aria-describedby="name-error">
+                            <div id="name-error" class="error-message" role="alert" aria-live="polite"></div>
+                        </div>
                         
-                        <input type="email"
-                               id="email"
-                               name="email"
-                               class="form-input"
-                               required
-                               aria-required="true"
-                               aria-describedby="email-hint email-error"
-                               inputmode="email">
+                        <div class="form-group">
+                            <label for="contact-email" class="form-label">Email *</label>
+                            <input type="email" id="contact-email" name="email" required
+                                   aria-required="true"
+                                   aria-describedby="email-error email-help">
+                            <div id="email-error" class="error-message" role="alert" aria-live="polite"></div>
+                            <div id="email-help" class="form-help">Мы отправим ответ на этот адрес</div>
+                        </div>
                         
-                        <div id="email-hint" class="form-hint">
-                            Мы отправим ответ на этот адрес
+                        <div class="form-group">
+                            <label for="contact-message" class="form-label">Сообщение</label>
+                            <textarea id="contact-message" name="message" rows="5"
+                                      aria-describedby="message-help"></textarea>
+                            <div id="message-help" class="form-help">Опишите вашу проблему или вопрос</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="checkbox" id="agree-terms" name="agree" required>
+                            <label for="agree-terms">
+                                Я согласен с обработкой персональных данных *
+                            </label>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                Отправить сообщение
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                Очистить форму
+                            </button>
+                        </div>
+                        
+                        <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+                    </form>
+                </section>
+                
+                <section class="lighthouse-guide">
+                    <h2>Как проверить в Lighthouse</h2>
+                    
+                    <ol class="guide-steps">
+                        <li>Откройте DevTools (F12)</li>
+                        <li>Перейдите на вкладку Lighthouse</li>
+                        <li>Выберите "Desktop" или "Mobile"</li>
+                        <li>Отметьте все категории</li>
+                        <li>Нажмите "Generate report"</li>
+                        <li>Изучите рекомендации по доступности</li>
+                    </ol>
+                    
+                    <div class="metrics">
+                        <div class="metric">
+                            <h3>Performance</h3>
+                            <div class="score">> 90</div>
+                        </div>
+                        <div class="metric">
+                            <h3>Accessibility</h3>
+                            <div class="score">100</div>
+                        </div>
+                        <div class="metric">
+                            <h3>Best Practices</h3>
+                            <div class="score">> 90</div>
+                        </div>
+                        <div class="metric">
+                            <h3>SEO</h3>
+                            <div class="score">100</div>
                         </div>
                     </div>
-                    
-                    <!-- Практика 18: Поле для анализа Lighthouse -->
-                    <div class="form-group">
-                        <label for="phone" class="form-label">Телефон</label>
-                        <input type="tel" 
-                               id="phone" 
-                               name="phone"
-                               class="form-input"
-                               aria-describedby="phone-hint"
-                               pattern="[\+]\d{1}\s?[\(]\d{3}[\)]\s?\d{3}[\-]\d{2}[\-]\d{2}"
-                               placeholder="+7 (999) 123-45-67">
-                        <div id="phone-hint" class="form-hint">
-                            Формат: +7 (999) 123-45-67
-                        </div>
-                    </div>
-                </fieldset>
-                
-                <!-- Выпадающий список -->
-                <div class="form-group">
-                    <label for="topic" class="form-label">Тема обращения</label>
-                    <select id="topic" 
-                            name="topic"
-                            class="form-select"
-                            aria-describedby="topic-hint">
-                        <option value="" selected disabled>Выберите тему</option>
-                        <option value="question">Вопрос по сайту</option>
-                        <option value="bug">Сообщить об ошибке</option>
-                        <option value="suggestion">Предложение</option>
-                    </select>
-                    <div id="topic-hint" class="form-hint">
-                        Выберите наиболее подходящую тему
-                    </div>
-                </div>
-                
-                <!-- Текстовое поле -->
-                <div class="form-group">
-                    <label for="message" class="form-label">Сообщение</label>
-                    <textarea id="message"
-                              name="message"
-                              class="form-textarea"
-                              rows="5"
-                              aria-describedby="message-hint"
-                              maxlength="1000"></textarea>
-                    <div id="message-hint" class="form-hint">
-                        Максимум 1000 символов
-                    </div>
-                    <div class="char-counter" aria-live="polite">
-                        Осталось символов: 1000
-                    </div>
-                </div>
-                
-                <!-- Группа радиокнопок -->
-                <fieldset class="form-fieldset">
-                    <legend class="form-legend">Предпочтительный способ связи</legend>
-                    
-                    <div class="radio-group">
-                        <input type="radio" 
-                               id="contact-email" 
-                               name="contact-method" 
-                               value="email"
-                               class="visually-hidden"
-                               checked>
-                        <label for="contact-email" class="radio-label">
-                            <span class="radio-custom"></span>
-                            Email
-                        </label>
-                        
-                        <input type="radio" 
-                               id="contact-phone" 
-                               name="contact-method" 
-                               value="phone"
-                               class="visually-hidden">
-                        <label for="contact-phone" class="radio-label">
-                            <span class="radio-custom"></span>
-                            Телефон
-                        </label>
-                    </div>
-                </fieldset>
-                
-                <!-- Чекбокс -->
-                <div class="form-group">
-                    <input type="checkbox" 
-                           id="agree" 
-                           name="agree"
-                           class="visually-hidden"
-                           required>
-                    <label for="agree" class="checkbox-label">
-                        <span class="checkbox-custom"></span>
-                        Я согласен на обработку персональных данных
-                        <span class="required-indicator" aria-hidden="true">*</span>
-                    </label>
-                </div>
-                
-                <!-- Кнопки -->
-                <div class="form-actions">
-                    <button type="submit" 
-                            class="button button-primary"
-                            aria-label="Отправить форму обратной связи">
-                        Отправить сообщение
-                    </button>
-                    
-                    <button type="reset" 
-                            class="button button-secondary"
-                            aria-label="Очистить форму">
-                        Очистить
-                    </button>
-                    
-                    <!-- Кнопка для демонстрации модального окна -->
-                    <button type="button"
-                            class="button button-help"
-                            aria-haspopup="dialog"
-                            aria-controls="help-modal">
-                        Нужна помощь?
-                    </button>
-                </div>
-                
-                <!-- Статус отправки -->
-                <div id="form-status" 
-                     class="form-status" 
-                     role="status" 
-                     aria-live="polite">
-                    <!-- Сообщения о статусе формы -->
-                </div>
-            </form>
-            
-            <!-- Практика 17: Модальное окно -->
-            <div id="help-modal" 
-                 class="modal" 
-                 role="dialog" 
-                 aria-modal="true"
-                 aria-labelledby="modal-title"
-                 aria-describedby="modal-desc"
-                 hidden>
-                <div class="modal-content">
-                    <h2 id="modal-title">Помощь по заполнению формы</h2>
-                    <p id="modal-desc">Здесь вы найдете ответы на частые вопросы</p>
-                    
-                    <button class="modal-close"
-                            aria-label="Закрыть окно помощи">
-                        ×
-                    </button>
-                    
-                    <div class="modal-body">
-                        <!-- Содержимое модального окна -->
-                    </div>
-                </div>
-                <div class="modal-overlay" tabindex="-1"></div>
+                </section>
             </div>
         </main>
-        
+
         <footer class="footer">
-            <!-- Футер -->
+            <div class="container">
+                <p>Контакты для связи &copy; 2024</p>
+                <p>Этот сайт создан для демонстрации лучших практик доступности</p>
+            </div>
         </footer>
     </div>
-    
-    <!-- Скрипты -->
-    <script src="scripts/form-validation.js"></script>
-    <script src="scripts/modal.js"></script>
-    
-    <!-- Практика 18: Скрипт для анализа формы через Lighthouse -->
-    <script>
-    // Этот код специально содержит "плохие практики" для демонстрации в Lighthouse
-    document.addEventListener('DOMContentLoaded', function() {
-        // НЕПРАВИЛЬНО: div с обработчиком клика (будет ошибка в Lighthouse)
-        const badButton = document.createElement('div');
-        badButton.textContent = 'Нажми меня (плохой пример)';
-        badButton.style.cssText = 'background: blue; color: white; padding: 10px; cursor: pointer; margin: 20px 0;';
-        badButton.onclick = function() {
-            alert('Это плохой пример кнопки!');
-        };
-        document.querySelector('form').appendChild(badButton);
-        
-        // Изображение без alt (будет ошибка в Lighthouse)
-        const badImage = document.createElement('img');
-        badImage.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiM2NjYiLz48L3N2Zz4=';
-        badImage.style.cssText = 'width: 100px; height: 100px; display: block; margin: 10px 0;';
-        document.querySelector('form').appendChild(badImage);
-        
-        // Поле без label (будет ошибка в Lighthouse)
-        const badInput = document.createElement('input');
-        badInput.type = 'text';
-        badInput.placeholder = 'Поле без лейбла (плохой пример)';
-        badInput.style.cssText = 'display: block; margin: 10px 0; padding: 5px;';
-        document.querySelector('form').appendChild(badInput);
-    });
-    </script>
+
+    <!-- Все JS в одной папке -->
+    <script src="main.js"></script>
+    <script src="validation.js"></script>
 </body>
 </html>

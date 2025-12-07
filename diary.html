@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Дневник - Практика 17</title>
+    <!-- Все CSS в одной папке -->
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="a11y.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Перейти к дневнику</a>
+    
+    <div class="page">
+        <header class="header">
+            <div class="container">
+                <h1 class="logo">Дневник практики</h1>
+                <nav class="nav" aria-label="Навигация по дневнику">
+                    <ul class="nav__list">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="projects.html">Проекты</a></li>
+                        <li><a href="diary.html" aria-current="page">Дневник</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main id="main-content" class="main">
+            <div class="container">
+                <h1 class="page-title">Аудит доступности</h1>
+                
+                <section class="results">
+                    <h2>Результаты проверки</h2>
+                    
+                    <div class="table-container">
+                        <table class="a11y-table" aria-describedby="table-desc">
+                            <caption id="table-desc" class="visually-hidden">
+                                Результаты аудита доступности по категориям
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Категория</th>
+                                    <th scope="col">Проблемы</th>
+                                    <th scope="col">Статус</th>
+                                    <th scope="col">Баллы</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Семантика</th>
+                                    <td>5</td>
+                                    <td><span class="status fixed">Исправлено</span></td>
+                                    <td>95/100</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Контраст</th>
+                                    <td>3</td>
+                                    <td><span class="status in-progress">В работе</span></td>
+                                    <td>85/100</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Навигация</th>
+                                    <td>2</td>
+                                    <td><span class="status fixed">Исправлено</span></td>
+                                    <td>98/100</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ARIA</th>
+                                    <td>4</td>
+                                    <td><span class="status pending">В ожидании</span></td>
+                                    <td>70/100</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <section class="entries">
+                    <h2>Записи аудита</h2>
+                    
+                    <article class="entry">
+                        <h3>День 1: Базовая доступность</h3>
+                        <time datetime="2024-01-15">15 января 2024</time>
+                        
+                        <div class="entry-content">
+                            <h4>Найденные проблемы:</h4>
+                            <ul>
+                                <li>Отсутствие alt у изображений</li>
+                                <li>Некорректная иерархия заголовков</li>
+                                <li>Нет skip-link</li>
+                            </ul>
+                            
+                            <h4>Исправления:</h4>
+                            <ol>
+                                <li>Добавлены alt атрибуты</li>
+                                <li>Исправлена структура заголовков</li>
+                                <li>Добавлена ссылка для пропуска</li>
+                            </ol>
+                        </div>
+                    </article>
+                    
+                    <article class="entry">
+                        <h3>День 2: Клавиатурная навигация</h3>
+                        <time datetime="2024-01-16">16 января 2024</time>
+                        
+                        <div class="entry-content">
+                            <h4>Тестирование:</h4>
+                            <ul>
+                                <li>Проверка Tab-навигации</li>
+                                <li>Тест :focus-visible</li>
+                                <li>Проверка логического порядка</li>
+                            </ul>
+                            
+                            <div class="note">
+                                <strong>Вывод:</strong> Все интерактивные элементы доступны с клавиатуры
+                            </div>
+                        </div>
+                    </article>
+                </section>
+                
+                <section class="notes-form">
+                    <h2>Добавить запись</h2>
+                    
+                    <form class="a11y-form" id="diary-form">
+                        <div class="form-group">
+                            <label for="entry-title" class="form-label">Заголовок записи *</label>
+                            <input type="text" id="entry-title" name="title" required
+                                   aria-required="true"
+                                   aria-describedby="title-help">
+                            <div id="title-help" class="form-help">Введите краткий заголовок записи</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="entry-content" class="form-label">Содержание</label>
+                            <textarea id="entry-content" name="content" rows="5"
+                                      aria-describedby="content-help"></textarea>
+                            <div id="content-help" class="form-help">Опишите найденные проблемы и решения</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <fieldset>
+                                <legend>Категория проблемы</legend>
+                                <div class="radio-group">
+                                    <input type="radio" id="cat-critical" name="category" value="critical">
+                                    <label for="cat-critical">Критическая</label>
+                                    
+                                    <input type="radio" id="cat-major" name="category" value="major">
+                                    <label for="cat-major">Серьезная</label>
+                                    
+                                    <input type="radio" id="cat-minor" name="category" value="minor">
+                                    <label for="cat-minor">Незначительная</label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            Сохранить запись
+                        </button>
+                    </form>
+                </section>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>Дневник аудита доступности &copy; 2024</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Все JS в одной папке -->
+    <script src="main.js"></script>
+</body>
+</html>

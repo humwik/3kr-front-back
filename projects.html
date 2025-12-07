@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Проекты - Практика 16</title>
+    <!-- Все CSS в одной папке -->
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Перейти к проектам</a>
+    
+    <div class="page">
+        <header class="header">
+            <div class="container">
+                <h1 class="logo">Адаптивные изображения</h1>
+                <nav class="nav" aria-label="Навигация по проектам">
+                    <ul class="nav__list">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="projects.html" aria-current="page">Проекты</a></li>
+                        <li><a href="diary.html">Дневник</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main id="main-content" class="main">
+            <div class="container">
+                <h1 class="page-title">Практика 16: Адаптивные изображения</h1>
+                
+                <section class="demo-section">
+                    <h2>Picture Element с разными размерами</h2>
+                    
+                    <div class="picture-demo">
+                        <picture>
+                            <source media="(min-width: 1024px)" 
+                                    srcset="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1024&h=400&fit=crop">
+                            <source media="(min-width: 768px)" 
+                                    srcset="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=768&h=300&fit=crop">
+                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=200&fit=crop" 
+                                 alt="Адаптивное изображение техники"
+                                 class="demo-image">
+                        </picture>
+                        <p class="demo-caption">Изображение меняется в зависимости от ширины экрана</p>
+                    </div>
+                </section>
+                
+                <section class="demo-section">
+                    <h2>Srcset с разными плотностями пикселей</h2>
+                    
+                    <div class="srcset-demo">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop"
+                             srcset="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop 1x,
+                                     https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=600&fit=crop 2x"
+                             alt="Пример изображения с поддержкой Retina"
+                             class="demo-image">
+                        <p class="demo-caption">Для Retina-экранов загружается изображение 2x</p>
+                    </div>
+                </section>
+                
+                <section class="demo-section">
+                    <h2>Object-fit свойства</h2>
+                    
+                    <div class="object-fit-demo">
+                        <div class="object-fit-item">
+                            <h3>Cover</h3>
+                            <div class="image-container">
+                                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=200&fit=crop"
+                                     alt="Object-fit cover"
+                                     class="object-fit-cover">
+                            </div>
+                        </div>
+                        
+                        <div class="object-fit-item">
+                            <h3>Contain</h3>
+                            <div class="image-container">
+                                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=200&fit=crop"
+                                     alt="Object-fit contain"
+                                     class="object-fit-contain">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="demo-section">
+                    <h2>Адаптивная галерея</h2>
+                    
+                    <div class="gallery">
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=200&h=150&fit=crop"
+                                 alt="Галерея 1" loading="lazy">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=200&h=150&fit=crop"
+                                 alt="Галерея 2" loading="lazy">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=200&h=150&fit=crop"
+                                 alt="Галерея 3" loading="lazy">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=200&h=150&fit=crop"
+                                 alt="Галерея 4" loading="lazy">
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>Проекты по адаптивным изображениям &copy; 2024</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Все JS в одной папке -->
+    <script src="main.js"></script>
+</body>
+</html>

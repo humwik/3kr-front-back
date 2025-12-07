@@ -1,0 +1,439 @@
+/* 
+   Практика 15-16: Адаптивные стили
+   Медиазапросы, responsive images, адаптивные таблицы
+*/
+
+/* ========== ПРАКТИКА 15: МЕДИАЗАПРОСЫ ========== */
+
+/* Мобильные устройства (до 576px) */
+@media (max-width: 576px) {
+    .container {
+        padding-inline: 1rem;
+    }
+    
+    .logo {
+        font-size: 1.25rem;
+    }
+    
+    .nav__list {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .hero__title {
+        font-size: 1.75rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* Планшеты (577px - 768px) */
+@media (min-width: 577px) and (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .object-fit-demo {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Десктопы (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Большие экраны (1025px+) */
+@media (min-width: 1025px) {
+    .container {
+        max-width: 1200px;
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .gallery {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ========== ПРАКТИКА 16: RESPONSIVE IMAGES ========== */
+
+/* Responsive images base */
+.responsive-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Picture element demo */
+.picture-demo {
+    margin: 2rem 0;
+}
+
+.picture-demo img {
+    width: 100%;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Srcset demo */
+.srcset-demo {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    margin: 2rem 0;
+}
+
+.srcset-demo img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid var(--primary);
+}
+
+/* Object-fit демонстрация */
+.object-fit-container {
+    width: 100%;
+    height: 300px;
+    background: #f1f5f9;
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.object-fit-demo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.object-fit-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.object-fit-btn {
+    padding: 0.5rem 1rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+.object-fit-btn:hover {
+    background: var(--primary-dark);
+}
+
+/* Lazy loading images */
+.lazy-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.lazy-images img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.lazy-images img.loaded {
+    opacity: 1;
+}
+
+/* ========== ПРАКТИКА 16: АДАПТИВНЫЕ ФОРМЫ ========== */
+
+@media (max-width: 768px) {
+    .contact-form {
+        padding: 1rem;
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+    }
+    
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    
+    .form-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .form-actions .btn {
+        width: 100%;
+    }
+}
+
+/* ========== ПРАКТИКА 16: АДАПТИВНЫЕ ТАБЛИЦЫ ========== */
+
+@media (max-width: 768px) {
+    .responsive-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .a11y-table {
+        font-size: 0.9rem;
+    }
+    
+    .a11y-table th,
+    .a11y-table td {
+        padding: 0.5rem;
+    }
+}
+
+/* Таблицы на очень маленьких экранах */
+@media (max-width: 480px) {
+    .table-container {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+    }
+    
+    .responsive-table {
+        display: block;
+    }
+    
+    .responsive-table thead {
+        display: none;
+    }
+    
+    .responsive-table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid var(--border);
+    }
+    
+    .responsive-table td {
+        display: block;
+        text-align: right;
+        border: none;
+        border-bottom: 1px solid var(--border);
+        position: relative;
+        padding-left: 50%;
+    }
+    
+    .responsive-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 45%;
+        padding-left: 1rem;
+        font-weight: bold;
+        text-align: left;
+    }
+}
+
+/* ========== ПРАКТИКА 15: CONTAINER QUERIES ========== */
+
+@supports (container-type: inline-size) {
+    .projects-container {
+        container-type: inline-size;
+        container-name: projects;
+    }
+    
+    @container projects (min-width: 400px) {
+        .card {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    
+    @container projects (min-width: 600px) {
+        .projects-inner {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+    }
+    
+    @container projects (min-width: 900px) {
+        .projects-inner {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
+
+/* ========== ПРАКТИКА 15: ПЛАВНЫЕ РАЗМЕРЫ ========== */
+
+/* Fluid typography */
+.fluid-text {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+}
+
+.fluid-heading {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+/* Fluid spacing */
+.fluid-padding {
+    padding: clamp(1rem, 3vw, 3rem);
+}
+
+.fluid-margin {
+    margin: clamp(0.5rem, 2vw, 2rem);
+}
+
+/* Fluid containers */
+.fluid-container {
+    width: min(100% - 2rem, 1200px);
+    margin-inline: auto;
+}
+
+/* ========== ПРАКТИКА 16: IMAGE ОПТИМИЗАЦИЯ ========== */
+
+/* Blur-up technique для изображений */
+.image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-wrapper img {
+    transition: filter 0.3s;
+}
+
+.image-wrapper img.blur {
+    filter: blur(10px);
+}
+
+.image-wrapper img.sharp {
+    filter: blur(0);
+}
+
+/* Аспектное соотношение */
+.aspect-ratio-box {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 */
+}
+
+.aspect-ratio-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ========== ТЕМНАЯ ТЕМА ========== */
+
+@media (prefers-color-scheme: dark) {
+    .srcset-demo {
+        background: #2d3748;
+    }
+    
+    .object-fit-container {
+        background: #4a5568;
+    }
+    
+    .picture-demo img {
+        border: 1px solid #4a5568;
+    }
+}
+
+/* ========== REDUCED MOTION ========== */
+
+@media (prefers-reduced-motion: reduce) {
+    .lazy-images img {
+        transition: none;
+        opacity: 1;
+    }
+    
+    .card {
+        transition: none;
+    }
+}
+
+/* ========== ВЫСОКИЙ КОНТРАСТ ========== */
+
+@media (prefers-contrast: more) {
+    .responsive-table {
+        border: 2px solid currentColor;
+    }
+    
+    .btn {
+        border: 2px solid currentColor;
+    }
+    
+    .form-input {
+        border: 2px solid currentColor;
+    }
+}
+
+/* ========== ОРИЕНТАЦИЯ УСТРОЙСТВА ========== */
+
+@media (orientation: portrait) {
+    .hero {
+        padding: 2rem 1rem;
+    }
+    
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+    .header {
+        padding: 0.5rem 0;
+    }
+    
+    .hero__title {
+        font-size: 1.5rem;
+    }
+}
+
+/* ========== ПЕЧАТЬ ========== */
+
+@media print {
+    .nav,
+    .btn,
+    .contact-form,
+    .footer {
+        display: none;
+    }
+    
+    body {
+        font-size: 12pt;
+        color: black;
+        background: white;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+    
+    .card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
