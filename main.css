@@ -238,7 +238,11 @@ body {
 /* ========== ФОРМЫ ========== */
 .form-group {
     margin-bottom: var(--space-md);
+    color: whitesmoke;
+    border-bottom-color: #0f172a;
 }
+
+
 
 .form-label {
     display: block;
@@ -250,7 +254,7 @@ body {
 .form-input {
     width: 100%;
     padding: var(--space-sm);
-    border: 2px solid var(--border);
+    border: 5px solid var(--border);
     border-radius: var(--radius);
     font-size: 1rem;
     font-family: inherit;
@@ -276,17 +280,22 @@ textarea.form-input {
 .table-container {
     overflow-x: auto;
     margin: var(--space-lg) 0;
-    border: 1px solid var(--border);
+  border: 3px solid var(--border); /* переменная */
     border-radius: var(--radius);
+    font-size: 16px;
 }
 
 .a11y-table {
+    border: 3px solid var(--border); /* переменная */
+    border-radius: var(--radius);
     width: 100%;
     border-collapse: collapse;
     min-width: 600px;
 }
 
 .a11y-table th {
+   border: 3px solid var(--border); /* переменная */
+    border-radius: var(--radius);
     background: var(--primary);
     color: white;
     padding: var(--space-sm);
@@ -295,12 +304,15 @@ textarea.form-input {
 }
 
 .a11y-table td {
+    border: 3px solid var(--border); /* переменная */
+    border-radius: var(--radius);
     padding: var(--space-sm);
     border-bottom: 1px solid var(--border);
 }
 
 .a11y-table tr:hover {
-    background: var(--bg-secondary);
+    border: 1px solid var(--border); /* переменная */
+    border-radius: var(--radius);
 }
 
 /* ========== ФУТЕР ========== */
@@ -374,16 +386,43 @@ textarea.form-input {
 }
 
 .entry-content li {
+    color:#0f172a;
     margin-bottom: var(--space-xs);
+}
+.note {
+     color:#0f172a;
+}
+.notes-form h2{
+   color: #C0C0C0;
+
+
 }
 
 /* ========== СТРАНИЦА ПРОЕКТОВ ========== */
 .demo-section {
     background: var(--bg);
-    border: 1px solid var(--border);
+    border: 3px solid var(--border);
     border-radius: var(--radius);
     padding: var(--space-lg);
     margin-bottom: var(--space-lg);
+    
+}
+.demo-section h2 {
+    color: #0f172a;  /* почти черный для заголовков */
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.demo-caption{
+    color: #0f172a;  /* почти черный для заголовков */
+    margin-bottom: 1rem;
+    font-size: 1 rem;
+}
+
+.demo-section h3 {
+    color: #0f172a;  /* почти черный для заголовков */
+    margin-bottom: 1rem;
+    font-size: 2 rem;
 }
 
 .demo-image {
@@ -420,6 +459,7 @@ textarea.form-input {
     border-radius: var(--radius);
     padding: var(--space-lg);
     margin: var(--space-lg) 0;
+    color:#0f172a;
 }
 
 .problems-grid {
@@ -554,3 +594,5 @@ textarea.form-input {
         transition: none !important;
     }
 }
+
+
