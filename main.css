@@ -1,238 +1,90 @@
-/* 
-   Практика 15-18: Основные стили
-   Контрольная работа по адаптивной верстке и доступности
+/*
+   Контрольная работа - Практики 15-18
+   ОДИН нормальный CSS файл
 */
 
-/* ========== ПРАКТИКА 15: БАЗОВЫЕ НАСТРОЙКИ ========== */
-
-/* CSS переменные */
+/* ========== БАЗОВЫЕ СТИЛИ ========== */
 :root {
-    /* Цветовая палитра */
-    --primary-color: #2563eb;
+    /* Цвета */
+    --primary: #2563eb;
     --primary-dark: #1d4ed8;
     --primary-light: #dbeafe;
-    --secondary-color: #64748b;
-    --success-color: #10b981;
-    --warning-color: #f59e0b;
-    --danger-color: #ef4444;
+    --secondary: #64748b;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --dark: #0f172a;
+    --light: #f8fafc;
     
-    /* Фоны и текст */
-    --bg-color: #f8fafc;
-    --surface-color: #ffffff;
-    --text-color: #0f172a;
+    /* Текст */
+    --text-dark: #1e293b;
     --text-light: #64748b;
-    --border-color: #e2e8f0;
+    
+    /* Фоны */
+    --bg: #ffffff;
+    --bg-secondary: #f1f5f9;
+    --bg-dark: #0f172a;
+    
+    /* Границы */
+    --border: #e2e8f0;
+    --border-dark: #475569;
     
     /* Тени */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     
-    /* Радиусы скругления */
-    --radius-sm: 0.25rem;
-    --radius: 0.5rem;
-    --radius-lg: 0.75rem;
-    --radius-xl: 1rem;
+    /* Скругления */
+    --radius: 8px;
+    --radius-sm: 4px;
+    --radius-lg: 12px;
     
-    /* Отступы (spacing) */
+    /* Отступы */
     --space-xs: 0.5rem;
     --space-sm: 1rem;
     --space-md: 1.5rem;
     --space-lg: 2rem;
     --space-xl: 3rem;
-    --space-2xl: 4rem;
-    
-    /* Typography */
-    --font-size-xs: 0.75rem;
-    --font-size-sm: 0.875rem;
-    --font-size-base: 1rem;
-    --font-size-lg: 1.125rem;
-    --font-size-xl: 1.25rem;
-    --font-size-2xl: 1.5rem;
-    --font-size-3xl: 1.875rem;
-    --font-size-4xl: 2.25rem;
-    
-    /* Line heights */
-    --line-height-tight: 1.25;
-    --line-height-normal: 1.5;
-    --line-height-relaxed: 1.75;
 }
 
-/* ========== БАЗОВЫЕ СБРОСЫ ========== */
-
-/* Практика 15: Корректный сброс */
-*,
-*::before,
-*::after {
+/* Сброс */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 html {
-    /* Практика 15: Плавный скролл */
     scroll-behavior: smooth;
-    
-    /* Практика 15: Запрет горизонтального скролла */
-    overflow-x: hidden;
 }
 
 body {
-    /* Практика 15: 100% высота */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-dark);
+    background: var(--bg);
     min-height: 100vh;
-    min-height: 100svh;
-    min-height: 100dvh;
-    
-    /* Практика 15: Базовые шрифты */
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-normal);
-    color: var(--text-color);
-    background-color: var(--bg-color);
-    
-    /* Практика 15: Предотвращение прыжков контента */
-    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Практика 15: Ссылка для пропуска */
-.skip-link {
-    position: absolute;
-    top: -100px;
-    left: var(--space-sm);
-    z-index: 9999;
-    padding: var(--space-xs) var(--space-sm);
-    background: var(--text-color);
-    color: white;
-    text-decoration: none;
-    border-radius: var(--radius);
-    font-weight: 600;
-    transition: top 0.3s ease;
-}
-
-.skip-link:focus {
-    top: var(--space-sm);
-}
-
-/* ========== ПРАКТИКА 15: ТИПОГРАФИЯ ========== */
-
-/* Практика 15: Плавные размеры через clamp() */
-h1, .h1 {
-    font-size: clamp(var(--font-size-3xl), 5vw, var(--font-size-4xl));
-    line-height: var(--line-height-tight);
-    margin-bottom: var(--space-lg);
-}
-
-h2, .h2 {
-    font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-3xl));
-    line-height: var(--line-height-tight);
-    margin-bottom: var(--space-md);
-}
-
-h3, .h3 {
-    font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-2xl));
-    line-height: var(--line-height-tight);
-    margin-bottom: var(--space-sm);
-}
-
-h4, .h4 {
-    font-size: clamp(var(--font-size-lg), 2vw, var(--font-size-xl));
-    margin-bottom: var(--space-sm);
-}
-
-p {
-    margin-bottom: var(--space-sm);
-    max-width: 65ch;
-}
-
-/* Практика 15: Плавные отступы для секций */
-.section {
-    padding-block: clamp(var(--space-lg), 5vw, var(--space-2xl));
-}
-
-/* ========== ПРАКТИКА 15: LAYOUT ========== */
-
-/* Контейнер с плавными отступами */
+/* Контейнер */
 .container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding-inline: clamp(var(--space-md), 3vw, var(--space-xl));
+    padding: 0 var(--space-md);
 }
 
-/* Flex утилиты */
-.flex {
-    display: flex;
-}
-
-.flex-col {
-    flex-direction: column;
-}
-
-.items-center {
-    align-items: center;
-}
-
-.justify-between {
-    justify-content: space-between;
-}
-
-.gap-sm {
-    gap: var(--space-sm);
-}
-
-.gap-md {
-    gap: var(--space-md);
-}
-
-.gap-lg {
-    gap: var(--space-lg);
-}
-
-/* Grid утилиты */
-.grid {
-    display: grid;
-}
-
-.grid-cols-2 {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.grid-cols-3 {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.grid-cols-4 {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.gap-sm {
-    gap: var(--space-sm);
-}
-
-.gap-md {
-    gap: var(--space-md);
-}
-
-.gap-lg {
-    gap: var(--space-lg);
-}
-
-/* ========== ПРАКТИКА 15: HEADER И НАВИГАЦИЯ ========== */
-
+/* ========== ХЕДЕР ========== */
 .header {
-    background-color: var(--surface-color);
-    box-shadow: var(--shadow-sm);
+    background: var(--primary);
+    color: white;
+    padding: var(--space-md) 0;
     position: sticky;
     top: 0;
-    z-index: 100;
-    
-    /* Практика 15: Safe areas для вырезов */
-    padding-block-start: calc(var(--space-md) + env(safe-area-inset-top));
-    padding-block-end: var(--space-md);
-    padding-inline: clamp(var(--space-sm), 2vw, var(--space-lg));
-    
-    isolation: isolate;
+    z-index: 1000;
+    box-shadow: var(--shadow);
 }
 
 .header .container {
@@ -242,13 +94,12 @@ p {
 }
 
 .logo {
-    font-size: var(--font-size-xl);
-    font-weight: 700;
-    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
     text-decoration: none;
 }
 
-/* Навигация */
 .nav__list {
     display: flex;
     list-style: none;
@@ -256,169 +107,135 @@ p {
 }
 
 .nav__link {
-    color: var(--text-color);
+    color: white;
     text-decoration: none;
     padding: var(--space-xs) var(--space-sm);
-    border-radius: var(--radius);
-    transition: all 0.2s ease;
-    position: relative;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s;
 }
 
 .nav__link:hover {
-    background-color: var(--primary-light);
-    color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .nav__link[aria-current="page"] {
-    background-color: var(--primary-color);
-    color: white;
+    background: rgba(255, 255, 255, 0.2);
 }
 
-/* ========== ПРАКТИКА 15: MAIN CONTENT ========== */
-
-.page {
-    min-height: 100vh;
-    min-height: 100svh;
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-}
-
+/* ========== ГЛАВНЫЙ КОНТЕНТ ========== */
 .main {
     flex: 1;
+    padding: var(--space-xl) 0;
 }
 
-/* ========== ПРАКТИКА 15: HERO SECTION ========== */
+.page-title {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-lg);
+    color: var(--dark);
+}
 
+.section-title {
+    font-size: 2rem;
+    margin-bottom: var(--space-md);
+    color: var(--dark);
+}
+
+/* ========== ГЕРОЙ СЕКЦИЯ ========== */
 .hero {
     background: linear-gradient(135deg, var(--primary-light) 0%, #e0f2fe 100%);
-    padding-block: var(--space-2xl);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
     text-align: center;
 }
 
 .hero__title {
-    font-size: clamp(var(--font-size-3xl), 6vw, 3.5rem);
+    font-size: 3rem;
     margin-bottom: var(--space-sm);
-    color: var(--text-color);
+    color: var(--dark);
 }
 
 .hero__subtitle {
-    font-size: clamp(var(--font-size-lg), 3vw, var(--font-size-2xl));
+    font-size: 1.25rem;
     color: var(--text-light);
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-lg);
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.hero-image {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.image-placeholder {
-    width: 100%;
-    aspect-ratio: 16/9;
-    background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
-    border-radius: var(--radius-lg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 600;
-    box-shadow: var(--shadow-lg);
-}
-
-.placeholder-text {
-    font-size: var(--font-size-lg);
-}
-
-/* ========== ПРАКТИКА 15: GRID СЕТКА ========== */
-
+/* ========== КАРТОЧКИ ========== */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-    gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-md);
     margin: var(--space-xl) 0;
 }
 
 .card {
-    background: var(--surface-color);
-    border-radius: var(--radius-lg);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     padding: var(--space-lg);
     box-shadow: var(--shadow);
-    border: 1px solid var(--border-color);
     transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
 }
 
 .card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
-    border-color: var(--primary-color);
+    border-color: var(--primary);
 }
 
 .card h3 {
-    color: var(--primary-color);
+    color: var(--primary);
     margin-bottom: var(--space-sm);
+    font-size: 1.25rem;
 }
 
 .card p {
     color: var(--text-light);
-    flex: 1;
+    line-height: 1.6;
 }
 
-/* ========== ПРАКТИКА 15: BUTTONS ========== */
-
+/* ========== КНОПКИ ========== */
 .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-block;
     padding: var(--space-sm) var(--space-lg);
+    background: var(--primary);
+    color: white;
+    border: none;
     border-radius: var(--radius);
+    font-size: 1rem;
     font-weight: 600;
-    text-decoration: none;
     cursor: pointer;
-    border: 2px solid transparent;
+    text-decoration: none;
     transition: all 0.2s ease;
-    font-size: var(--font-size-base);
-    line-height: 1;
-    
-    /* Практика 17: Минимальный размер для тач устройств */
-    min-height: 44px;
-    min-width: 44px;
+    text-align: center;
+}
+
+.btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
 }
 
 .btn-primary {
-    background-color: var(--primary-color);
-    color: white;
+    background: var(--primary);
 }
 
 .btn-primary:hover {
-    background-color: var(--primary-dark);
+    background: var(--primary-dark);
 }
 
 .btn-secondary {
-    background-color: var(--surface-color);
-    color: var(--text-color);
-    border-color: var(--border-color);
+    background: var(--secondary);
 }
 
 .btn-secondary:hover {
-    background-color: var(--bg-color);
-    border-color: var(--primary-color);
+    background: #475569;
 }
 
-/* Практика 17: Фокус для кнопок */
-.btn:focus-visible {
-    outline: 3px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
-/* ========== ПРАКТИКА 15: FORMS ========== */
-
+/* ========== ФОРМЫ ========== */
 .form-group {
     margin-bottom: var(--space-md);
 }
@@ -427,64 +244,79 @@ p {
     display: block;
     margin-bottom: var(--space-xs);
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--text-dark);
 }
 
-.form-input,
-.form-select,
-textarea {
+.form-input {
     width: 100%;
     padding: var(--space-sm);
-    border: 2px solid var(--border-color);
+    border: 2px solid var(--border);
     border-radius: var(--radius);
-    font-size: var(--font-size-base);
+    font-size: 1rem;
     font-family: inherit;
-    transition: all 0.2s ease;
-    background-color: var(--surface-color);
+    transition: border-color 0.2s;
 }
 
-.form-input:focus,
-.form-select:focus,
-textarea:focus {
+.form-input:focus {
     outline: none;
-    border-color: var(--primary-color);
+    border-color: var(--primary);
     box-shadow: 0 0 0 3px var(--primary-light);
 }
 
-/* Практика 17: Ошибки в формах */
-.form-input.error,
-.form-select.error,
-textarea.error {
-    border-color: var(--danger-color);
+.form-input.error {
+    border-color: var(--danger);
 }
 
-.error-message {
-    color: var(--danger-color);
-    font-size: var(--font-size-sm);
-    margin-top: var(--space-xs);
-    display: none;
+textarea.form-input {
+    min-height: 120px;
+    resize: vertical;
 }
 
-.error-message:not(:empty) {
-    display: block;
+/* ========== ТАБЛИЦЫ ========== */
+.table-container {
+    overflow-x: auto;
+    margin: var(--space-lg) 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
 }
 
-/* ========== ПРАКТИКА 15: FOOTER ========== */
+.a11y-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
 
-.footer {
-    background-color: var(--text-color);
+.a11y-table th {
+    background: var(--primary);
     color: white;
-    padding-block: var(--space-xl);
+    padding: var(--space-sm);
+    text-align: left;
+    font-weight: 600;
+}
+
+.a11y-table td {
+    padding: var(--space-sm);
+    border-bottom: 1px solid var(--border);
+}
+
+.a11y-table tr:hover {
+    background: var(--bg-secondary);
+}
+
+/* ========== ФУТЕР ========== */
+.footer {
+    background: var(--dark);
+    color: white;
+    padding: var(--space-xl) 0;
     margin-top: auto;
-    
-    /* Практика 15: Safe area для жестовой панели */
-    padding-bottom: calc(var(--space-xl) + env(safe-area-inset-bottom));
 }
 
 .footer-content {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-md);
 }
 
 .social-links {
@@ -497,111 +329,104 @@ textarea.error {
     color: white;
     text-decoration: none;
     padding: var(--space-xs) var(--space-sm);
-    border-radius: var(--radius);
-    transition: background-color 0.2s ease;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s;
 }
 
 .social-links a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
-/* ========== ПРАКТИКА 16: IMAGES ========== */
-
-.responsive-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-.image-container {
-    overflow: hidden;
+/* ========== СТРАНИЦА ДНЕВНИКА ========== */
+.entry {
+    background: var(--bg);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-md);
+}
+
+.entry h3 {
+    color: var(--primary);
+    margin-bottom: var(--space-xs);
+}
+
+.entry time {
+    color: var(--text-light);
+    font-size: 0.875rem;
+    display: block;
+    margin-bottom: var(--space-md);
+}
+
+.entry-content {
+    margin-top: var(--space-md);
+}
+
+.entry-content h4 {
+    color: var(--text-dark);
+    margin: var(--space-sm) 0;
+}
+
+.entry-content ul,
+.entry-content ol {
+    margin-left: var(--space-lg);
+    margin-bottom: var(--space-sm);
+}
+
+.entry-content li {
+    margin-bottom: var(--space-xs);
+}
+
+/* ========== СТРАНИЦА ПРОЕКТОВ ========== */
+.demo-section {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
 }
 
 .demo-image {
     width: 100%;
     height: auto;
     border-radius: var(--radius);
-    box-shadow: var(--shadow);
+    margin: var(--space-md) 0;
 }
 
-.demo-caption {
-    margin-top: var(--space-sm);
-    color: var(--text-light);
-    font-size: var(--font-size-sm);
+.object-fit-demo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-md);
+    margin: var(--space-md) 0;
 }
 
-/* ========== ПРАКТИКА 17: TABLES ========== */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-md);
+    margin: var(--space-md) 0;
+}
 
-.a11y-table {
+.gallery img {
     width: 100%;
-    border-collapse: collapse;
-    margin: var(--space-lg) 0;
+    height: 150px;
+    object-fit: cover;
+    border-radius: var(--radius);
 }
 
-.a11y-table th {
-    background-color: var(--primary-color);
-    color: white;
-    text-align: left;
-    padding: var(--space-sm);
-    font-weight: 600;
-}
-
-.a11y-table td {
-    padding: var(--space-sm);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.a11y-table tr:hover {
-    background-color: var(--bg-color);
-}
-
-.table-container {
-    overflow-x: auto;
-    margin: var(--space-lg) 0;
-}
-
-/* ========== ПРАКТИКА 17: STATUS BADGES ========== */
-
-.status {
-    display: inline-block;
-    padding: var(--space-xs) var(--space-sm);
-    border-radius: 100px;
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.status.fixed {
-    background-color: #d1fae5;
-    color: #065f46;
-}
-
-.status.in-progress {
-    background-color: #fef3c7;
-    color: #92400e;
-}
-
-.status.pending {
-    background-color: #e0e7ff;
-    color: #3730a3;
-}
-
-/* ========== ПРАКТИКА 18: LIGHTHOUSE DEMO ========== */
-
+/* ========== СТРАНИЦА КОНТАКТОВ ========== */
 .lighthouse-demo {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    padding: var(--space-xl);
-    border-radius: var(--radius-lg);
-    margin: var(--space-xl) 0;
+    background: var(--bg-secondary);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+    margin: var(--space-lg) 0;
 }
 
 .problems-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-lg);
-    margin: var(--space-lg) 0;
+    gap: var(--space-md);
+    margin: var(--space-md) 0;
 }
 
 .problem-card {
@@ -611,226 +436,121 @@ textarea.error {
 }
 
 .bad-example {
-    border-color: var(--danger-color);
-    background-color: #fef2f2;
+    border-color: var(--danger);
+    background: #fee2e2;
 }
 
 .good-example {
-    border-color: var(--success-color);
-    background-color: #f0fdf4;
+    border-color: var(--success);
+    background: #d1fae5;
 }
 
 .clickable-div {
     padding: var(--space-md);
-    background-color: var(--primary-color);
+    background: var(--primary);
     color: white;
     border-radius: var(--radius);
-    cursor: pointer;
     margin: var(--space-sm) 0;
     text-align: center;
-    font-weight: 600;
-    
-    /* Практика 18: Плохая практика для демонстрации */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 60px;
+    cursor: pointer;
 }
 
-.problem-desc {
-    color: var(--danger-color);
-    font-size: var(--font-size-sm);
-    margin-top: var(--space-sm);
-    font-style: italic;
+/* ========== ДОСТУПНОСТЬ ========== */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: var(--space-md);
+    background: var(--dark);
+    color: white;
+    padding: var(--space-sm);
+    border-radius: var(--radius);
+    text-decoration: none;
+    z-index: 1001;
 }
 
-.solution-desc {
-    color: var(--success-color);
-    font-size: var(--font-size-sm);
-    margin-top: var(--space-sm);
-    font-style: italic;
-}
-
-/* ========== ПРАКТИКА 15: UTILITY CLASSES ========== */
-
-.text-center {
-    text-align: center;
-}
-
-.mt-sm { margin-top: var(--space-sm); }
-.mt-md { margin-top: var(--space-md); }
-.mt-lg { margin-top: var(--space-lg); }
-.mt-xl { margin-top: var(--space-xl); }
-
-.mb-sm { margin-bottom: var(--space-sm); }
-.mb-md { margin-bottom: var(--space-md); }
-.mb-lg { margin-bottom: var(--space-lg); }
-.mb-xl { margin-bottom: var(--space-xl); }
-
-.py-sm { padding-block: var(--space-sm); }
-.py-md { padding-block: var(--space-md); }
-.py-lg { padding-block: var(--space-lg); }
-.py-xl { padding-block: var(--space-xl); }
-
-.px-sm { padding-inline: var(--space-sm); }
-.px-md { padding-inline: var(--space-md); }
-.px-lg { padding-inline: var(--space-lg); }
-.px-xl { padding-inline: var(--space-xl); }
-
-/* ========== ПРАКТИКА 17: ACCESSIBILITY ========== */
-
-/* Visually hidden but accessible for screen readers */
-.visually-hidden {
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    padding: 0 !important;
-    margin: -1px !important;
-    overflow: hidden !important;
-    clip: rect(0, 0, 0, 0) !important;
-    white-space: nowrap !important;
-    border: 0 !important;
-}
-
-/* Focus styles */
-:focus {
-    outline: 3px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
-:focus:not(:focus-visible) {
-    outline: none;
+.skip-link:focus {
+    top: var(--space-md);
 }
 
 :focus-visible {
-    outline: 3px solid var(--primary-color);
+    outline: 3px solid var(--primary);
     outline-offset: 2px;
 }
 
-/* High contrast mode */
-@media (prefers-contrast: high) {
-    .btn {
-        border: 2px solid currentColor;
+/* ========== МЕДИАЗАПРОСЫ ========== */
+/* Планшеты */
+@media (max-width: 768px) {
+    .header .container {
+        flex-direction: column;
+        gap: var(--space-md);
     }
     
-    .form-input,
-    .form-select,
-    textarea {
-        border: 2px solid currentColor;
+    .nav__list {
+        flex-wrap: wrap;
+        justify-content: center;
     }
     
-    .card {
-        border: 2px solid currentColor;
+    .hero__title {
+        font-size: 2rem;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-lg);
     }
 }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+/* Мобильные */
+@media (max-width: 480px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
     }
     
-    .card:hover {
-        transform: none;
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
     }
     
-    .btn:hover {
-        transform: none;
+    .object-fit-demo {
+        grid-template-columns: 1fr;
+    }
+    
+    .problems-grid {
+        grid-template-columns: 1fr;
     }
 }
 
-/* ========== ПРАКТИКА 15: DARK THEME ========== */
-
+/* Темная тема */
 @media (prefers-color-scheme: dark) {
-    :root {
-        --bg-color: #0f172a;
-        --surface-color: #1e293b;
-        --text-color: #f1f5f9;
-        --text-light: #cbd5e1;
-        --border-color: #334155;
-        --primary-light: #1e3a8a;
-    }
-    
-    .hero {
-        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-    }
-    
-    .card {
-        background-color: var(--surface-color);
-    }
-    
-    .lighthouse-demo {
-        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-    }
-}
-
-/* ========== ПРАКТИКА 15: PRINT STYLES ========== */
-
-@media print {
-    .header,
-    .footer,
-    .btn,
-    .contact-form {
-        display: none;
-    }
-    
     body {
-        font-size: 12pt;
-        color: black;
-        background: white;
+        background: var(--bg-dark);
+        color: #e2e8f0;
     }
     
-    .container {
-        max-width: 100%;
-        padding: 0;
-    }
-    
-    a {
-        color: black;
-        text-decoration: underline;
+    .bg {
+        background: #1e293b;
     }
     
     .card {
-        break-inside: avoid;
-        box-shadow: none;
-        border: 1px solid #ddd;
+        background: #1e293b;
+        border-color: #475569;
+    }
+    
+    .form-input {
+        background: #1e293b;
+        border-color: #475569;
+        color: #e2e8f0;
     }
 }
 
-/* ========== ПРАКТИКА 15: CONTAINER QUERIES ========== */
-
-@supports (container-type: inline-size) {
-    .projects-container {
-        container-type: inline-size;
-        container-name: projects;
-    }
-    
-    @container projects (min-width: 400px) {
-        .card {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .card h3 {
-            font-size: var(--font-size-lg);
-        }
-    }
-    
-    @container projects (min-width: 600px) {
-        .projects-inner {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--space-md);
-        }
-    }
-    
-    @container projects (min-width: 900px) {
-        .projects-inner {
-            grid-template-columns: repeat(3, 1fr);
-        }
+/* Уменьшение движения */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
     }
 }
